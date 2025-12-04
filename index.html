@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ten Poem Project: Auntie | Sinclair Emoghene</title>
+    <meta name="description" content="A hybrid dance film bringing together poetry, movement, and lived testimony to explore migration, identity, and artistic resilience.">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --bg: #0a0a0a;
+            --white: #ffffff;
+            --gray: #888888;
+            --gray-dark: #333333;
+            --violet: #6B4CE6;
+            --coral: #FF6B35;
+            --mint: #5FFFB0;
+            --blue: #0066FF;
+        }
+        
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--white);
+            font-weight: 300;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+        
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 25px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(to bottom, rgba(10,10,10,0.9) 0%, transparent 100%);
+        }
+        
+        .logo {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.7em;
+            font-weight: 500;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--coral);
+            text-decoration: none;
+        }
+        
+        .menu-icon {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+        }
+        
+        .menu-icon span {
+            width: 25px;
+            height: 2px;
+            background: var(--white);
+        }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+        }
+        
+        .hero-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.6;
+        }
+        
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, 
+                rgba(10,10,10,0.3) 0%, 
+                rgba(10,10,10,0.5) 50%,
+                rgba(10,10,10,0.95) 100%);
+            z-index: 1;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 0 20px;
+            max-width: 1000px;
+        }
+        
+        .hero-label {
+            font-size: 0.75em;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--coral);
+            margin-bottom: 20px;
+        }
+        
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3.5em, 12vw, 9em);
+            font-weight: 400;
+            line-height: 0.95;
+            margin-bottom: 10px;
+        }
+        
+        .hero-title .line1 {
+            display: block;
+            color: var(--violet);
+        }
+        
+        .hero-title .line2 {
+            display: block;
+            color: var(--white);
+            font-style: italic;
+        }
+        
+        .hero-subtitle {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3em;
+            font-weight: 400;
+            color: var(--mint);
+            margin-top: 30px;
+            font-style: italic;
+        }
+        
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            font-size: 0.7em;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--gray);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .scroll-indicator::after {
+            content: '↓';
+            font-size: 1.5em;
+        }
+        
+        /* Laurels Section */
+        .laurels {
+            padding: 60px 40px;
+            background: var(--bg);
+            border-top: 1px solid var(--gray-dark);
+            border-bottom: 1px solid var(--gray-dark);
+        }
+        
+        .laurels-label {
+            text-align: center;
+            font-size: 0.65em;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--gray);
+            margin-bottom: 30px;
+        }
+        
+        .laurels-grid {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .laurels-grid img {
+            height: 90px;
+            width: auto;
+            opacity: 0.9;
+            transition: opacity 0.3s, transform 0.3s;
+        }
+        
+        .laurels-grid img:hover {
+            opacity: 1;
+            transform: scale(1.05);
+        }
+        
+        /* Video Section */
+        .video-section {
+            padding: 100px 40px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            background: #000;
+        }
+        
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .video-caption {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--gray-dark);
+            font-size: 0.8em;
+            color: var(--gray);
+        }
+        
+        .video-caption span {
+            color: var(--white);
+        }
+        
+        /* Section Styles */
+        section {
+            padding: 100px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-header {
+            margin-bottom: 60px;
+        }
+        
+        .section-label {
+            font-size: 0.65em;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--coral);
+            margin-bottom: 15px;
+        }
+        
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2em, 5vw, 3.5em);
+            font-weight: 400;
+            line-height: 1.2;
+        }
+        
+        h2 .accent {
+            color: var(--violet);
+            font-style: italic;
+        }
+        
+        /* Two Column */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: start;
+        }
+        
+        .col-text p {
+            margin-bottom: 25px;
+            font-size: 1.05em;
+            color: rgba(255,255,255,0.85);
+        }
+        
+        .col-text p:first-of-type::first-letter {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5em;
+            float: left;
+            line-height: 0.8;
+            margin-right: 10px;
+            color: var(--violet);
+        }
+        
+        .col-image {
+            position: relative;
+        }
+        
+        .col-image img {
+            width: 100%;
+            display: block;
+        }
+        
+        /* Quote Section */
+        .quote-section {
+            padding: 120px 40px;
+            text-align: center;
+            background: linear-gradient(to bottom, var(--bg) 0%, #0f0f12 50%, var(--bg) 100%);
+        }
+        
+        .quote-section blockquote {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.5em, 4vw, 2.8em);
+            font-style: italic;
+            font-weight: 400;
+            line-height: 1.5;
+            max-width: 900px;
+            margin: 0 auto;
+            color: var(--white);
+        }
+        
+        .quote-section blockquote span {
+            color: var(--mint);
+        }
+        
+        .quote-section cite {
+            display: block;
+            margin-top: 30px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.5em;
+            font-style: normal;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--gray);
+        }
+        
+        /* Gallery */
+        .gallery-section {
+            padding: 80px 0;
+        }
+        
+        .gallery-header {
+            padding: 0 40px;
+            margin-bottom: 40px;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3px;
+        }
+        
+        .gallery-item {
+            aspect-ratio: 1;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.08);
+        }
+        
+        .gallery-item.wide {
+            grid-column: span 2;
+            aspect-ratio: 2/1;
+        }
+        
+        .gallery-item.tall {
+            grid-row: span 2;
+            aspect-ratio: auto;
+        }
+        
+        /* Themes */
+        .themes-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2px;
+            margin-top: 60px;
+        }
+        
+        .theme-card {
+            background: #111;
+            padding: 50px 35px;
+            transition: background 0.3s;
+        }
+        
+        .theme-card:hover {
+            background: #151515;
+        }
+        
+        .theme-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 3em;
+            font-weight: 400;
+            color: var(--violet);
+            opacity: 0.4;
+            margin-bottom: 15px;
+        }
+        
+        .theme-card h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3em;
+            font-weight: 400;
+            margin-bottom: 12px;
+        }
+        
+        .theme-card p {
+            font-size: 0.9em;
+            color: var(--gray);
+            line-height: 1.6;
+        }
+        
+        /* Credits */
+        .credits-section {
+            padding: 100px 40px;
+            background: #050505;
+        }
+        
+        .credits-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 50px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .credit-block h4 {
+            font-size: 0.65em;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--coral);
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--gray-dark);
+        }
+        
+        .credit-block p {
+            font-size: 0.95em;
+            line-height: 1.8;
+        }
+        
+        .credit-block .name {
+            font-weight: 500;
+        }
+        
+        .credit-block .role {
+            color: var(--gray);
+        }
+        
+        /* Footer */
+        footer {
+            padding: 60px 40px;
+            text-align: center;
+            border-top: 1px solid var(--gray-dark);
+        }
+        
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5em;
+            margin-bottom: 25px;
+        }
+        
+        .footer-logo .accent {
+            color: var(--violet);
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-links a {
+            font-size: 0.7em;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--gray);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--coral);
+        }
+        
+        .footer-copy {
+            font-size: 0.75em;
+            color: var(--gray);
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .two-col { grid-template-columns: 1fr; gap: 40px; }
+            .themes-grid { grid-template-columns: repeat(2, 1fr); }
+            .credits-grid { grid-template-columns: repeat(2, 1fr); }
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        
+        @media (max-width: 768px) {
+            .header { padding: 20px 25px; }
+            section, .video-section { padding: 60px 25px; }
+            .laurels { padding: 40px 25px; }
+            .laurels-grid img { height: 60px; }
+            .themes-grid { grid-template-columns: 1fr; }
+            .credits-grid { grid-template-columns: 1fr; }
+            .gallery-grid { grid-template-columns: 1fr; }
+            .gallery-item.wide { grid-column: span 1; aspect-ratio: 16/9; }
+            .video-caption { flex-direction: column; gap: 10px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <a href="https://www.sinclair.dance" class="logo">Sinclair Dance</a>
+        <div class="menu-icon">
+            <span></span>
+            <span></span>
+        </div>
+    </header>
+    
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-bg">
+            <img src="images/blue_01.jpg" alt="Ten Poem Project">
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="hero-label">A Hybrid Dance Film</div>
+            <h1 class="hero-title">
+                <span class="line1">Ten Poem</span>
+                <span class="line2">Project: Auntie</span>
+            </h1>
+            <p class="hero-subtitle">Dance. Film. Poetry. A migrant body remembering itself.</p>
+        </div>
+        <div class="scroll-indicator">Scroll</div>
+    </section>
+    
+    <!-- Laurels -->
+    <div class="laurels">
+        <p class="laurels-label">Canada Shorts Film Festival 2025 — 7 Awards Including Grand Prize</p>
+        <div class="laurels-grid">
+            <img src="images/laurel_grand_prize.png" alt="Grand Prize">
+            <img src="images/laurel_director.png" alt="Best Director">
+            <img src="images/laurel_cinematography.png" alt="Best Cinematography">
+            <img src="images/laurel_score.png" alt="Best Score">
+            <img src="images/laurel_documentary.png" alt="Best Documentary">
+            <img src="images/laurel_experimental.png" alt="Best Experimental">
+            <img src="images/laurel_international.png" alt="Best International Short">
+        </div>
+    </div>
+    
+    <!-- Video -->
+    <section class="video-section">
+        <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/1aJfxFzEzkk?rel=0" title="Ten Poem Project: Auntie" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <div class="video-caption">
+            <div><span>Runtime:</span> 4 minutes</div>
+            <div><span>Director:</span> Nakoa Taggart</div>
+            <div><span>Cinematography:</span> Gabriel Vazquez</div>
+            <div><span>Producer:</span> Sinclair Emoghene</div>
+        </div>
+    </section>
+    
+    <!-- Synopsis -->
+    <section>
+        <div class="two-col">
+            <div class="col-text">
+                <div class="section-header">
+                    <div class="section-label">Synopsis</div>
+                    <h2>A migrant dancer <span class="accent">reassembling himself</span> through movement, voice, and memory</h2>
+                </div>
+                <p>The Ten Poem Project is a multimedia performance and short film that follows a migrant dancer as he attempts to piece himself together through movement, voice, and memory. Anchored in twelve original poems, the project explores migration, asylum, sexuality, trauma, the process of aging, and the resilience of the human spirit.</p>
+                <p>At its heart, the project asks: How does the body keep knowing itself when displacement keeps rewriting its reality? Using choreography as a language for what cannot be said directly, the work treats dance as both archive and testimony.</p>
+            </div>
+            <div class="col-image">
+                <img src="images/bts_05.jpg" alt="Behind the scenes">
+            </div>
+        </div>
+    </section>
+    
+    <!-- Quote -->
+    <section class="quote-section">
+        <blockquote>
+            "How does the body keep knowing itself when <span>displacement keeps rewriting its reality?</span>"
+            <cite>— From the Project Statement</cite>
+        </blockquote>
+    </section>
+    
+    <!-- Gallery -->
+    <section class="gallery-section">
+        <div class="gallery-header">
+            <div class="section-label">Production Stills</div>
+            <h2>Behind <span class="accent">the Lens</span></h2>
+        </div>
+        <div class="gallery-grid">
+            <div class="gallery-item wide"><img src="images/studio_03.jpg" alt="Studio"></div>
+            <div class="gallery-item"><img src="images/blue_02.jpg" alt="Blue screen"></div>
+            <div class="gallery-item"><img src="images/blue_03.jpg" alt="Blue screen"></div>
+            <div class="gallery-item"><img src="images/bts_01.jpg" alt="Behind the scenes"></div>
+            <div class="gallery-item"><img src="images/bts_02.jpg" alt="Behind the scenes"></div>
+            <div class="gallery-item wide"><img src="images/studio_01.jpg" alt="Studio wide"></div>
+            <div class="gallery-item"><img src="images/blue_04.jpg" alt="Blue screen"></div>
+            <div class="gallery-item"><img src="images/bts_03.jpg" alt="Behind the scenes"></div>
+            <div class="gallery-item"><img src="images/bts_04.jpg" alt="Behind the scenes"></div>
+            <div class="gallery-item"><img src="images/studio_04.jpg" alt="Studio"></div>
+            <div class="gallery-item wide"><img src="images/studio_02.jpg" alt="Studio"></div>
+        </div>
+    </section>
+    
+    <!-- Themes -->
+    <section>
+        <div class="section-header">
+            <div class="section-label">Thematic Pairings</div>
+            <h2>Six dualities that <span class="accent">shape the work</span></h2>
+        </div>
+        <div class="themes-grid">
+            <div class="theme-card">
+                <div class="theme-num">01</div>
+                <h4>Migration & Identity</h4>
+                <p>The constant negotiation between where you come from and where you find yourself.</p>
+            </div>
+            <div class="theme-card">
+                <div class="theme-num">02</div>
+                <h4>Memory & Trauma</h4>
+                <p>How the body holds what the mind cannot speak—scars as archive, movement as testimony.</p>
+            </div>
+            <div class="theme-card">
+                <div class="theme-num">03</div>
+                <h4>Solitude & Loneliness</h4>
+                <p>The difference between choosing stillness and being abandoned to it.</p>
+            </div>
+            <div class="theme-card">
+                <div class="theme-num">04</div>
+                <h4>Love & Relationships</h4>
+                <p>Intimacy across distance, desire that survives erasure.</p>
+            </div>
+            <div class="theme-card">
+                <div class="theme-num">05</div>
+                <h4>Resilience & Growth</h4>
+                <p>The quiet insistence on becoming, even when the world offers only resistance.</p>
+            </div>
+            <div class="theme-card">
+                <div class="theme-num">06</div>
+                <h4>Mortality & Aging</h4>
+                <p>What the body knows about time that the mind refuses to accept.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Credits -->
+    <section class="credits-section">
+        <div class="section-header" style="max-width: 1200px; margin: 0 auto 60px;">
+            <div class="section-label">Credits</div>
+            <h2>The <span class="accent">Team</span></h2>
+        </div>
+        <div class="credits-grid">
+            <div class="credit-block">
+                <h4>Direction</h4>
+                <p><span class="name">Nakoa Taggart</span><br><span class="role">Director</span></p>
+                <p style="margin-top: 15px;"><span class="name">Nakoa Taggart</span><br><span class="name">Sinclair Emoghene</span><br><span class="role">Writers</span></p>
+            </div>
+            <div class="credit-block">
+                <h4>Production</h4>
+                <p><span class="name">Sinclair Emoghene</span><br><span class="role">Producer</span></p>
+                <p style="margin-top: 15px;"><span class="name">Gabriel Vazquez</span><br><span class="role">Cinematographer</span></p>
+            </div>
+            <div class="credit-block">
+                <h4>Cast</h4>
+                <p><span class="name">Jalani Miller</span></p>
+                <p><span class="name">Lauren Troyer</span></p>
+                <p><span class="name">Giovanni Ledezma</span></p>
+                <p><span class="name">Sinclair Emoghene</span></p>
+            </div>
+            <div class="credit-block">
+                <h4>Recognition</h4>
+                <p><span class="name">Canada Shorts 2025</span><br>
+                <span class="role">Grand Prize (tie)<br>
+                Best Director (tie)<br>
+                Best Cinematography (tie)<br>
+                Best Music Score (tie)<br>
+                Best Documentary (tie)<br>
+                Best Experimental (tie)<br>
+                Best International Short (tie)</span></p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-logo">Sinclair <span class="accent">Emoghene</span></div>
+        <div class="footer-links">
+            <a href="https://www.sinclair.dance">Website</a>
+            <a href="https://theatredance.utexas.edu/profile/emoghene-sinclair">Faculty Bio</a>
+            <a href="https://github.com/SynckDance">GitHub</a>
+            <a href="https://canadashorts.com">Canada Shorts</a>
+        </div>
+        <p class="footer-copy">© 2025 Sinclair Emoghene. All rights reserved.</p>
+    </footer>
+</body>
+</html>
