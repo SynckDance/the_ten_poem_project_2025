@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ten Poem Project: Auntie</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    :root {
+      --white: #FFFFFF;
+      --cream: #FAF9F6;
+      --warm-gray: #F5F3EF;
+      --text-dark: #1a1a1a;
+      --text-mid: #4a4a4a;
+      --text-light: #777777;
+      --accent-blue: #2B4B8C;
+      --accent-gold: #B8860B;
+      --border: #e0ddd8;
+    }
+    
+    html { scroll-behavior: smooth; }
+    
+    body { 
+      font-family: 'Inter', sans-serif;
+      background: var(--cream);
+      color: var(--text-dark);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+    
+    /* Side Navigation */
+    .side-nav {
+      position: fixed;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding: 15px 10px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-left: none;
+      border-radius: 0 8px 8px 0;
+      box-shadow: 2px 0 15px rgba(0,0,0,0.05);
+    }
+    
+    .side-nav a {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      text-decoration: none;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      transition: all 0.2s;
+    }
+    
+    .side-nav a:hover,
+    .side-nav a.active {
+      color: var(--accent-blue);
+      border-color: var(--accent-blue);
+      background: rgba(43, 75, 140, 0.05);
+    }
+    
+    /* Main Content */
+    main {
+      margin-left: 60px;
+    }
+    
+    section {
+      padding: 100px 60px;
+      min-height: 100vh;
+    }
+    
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    
+    /* Typography */
+    .section-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--accent-blue);
+      margin-bottom: 12px;
+    }
+    
+    h1, h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      line-height: 1.2;
+      color: var(--text-dark);
+    }
+    
+    h1 { font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 20px; }
+    h2 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 20px; }
+    
+    .subtitle {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-style: italic;
+      color: var(--text-mid);
+      margin-bottom: 40px;
+    }
+    
+    p {
+      font-size: 1rem;
+      color: var(--text-mid);
+      margin-bottom: 1.5rem;
+    }
+    
+    /* Hero */
+    .hero {
+      background: var(--white);
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .hero-image {
+      width: 100%;
+      max-width: 500px;
+      aspect-ratio: 3/4;
+      background: var(--warm-gray);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-light);
+      font-size: 12px;
+      margin-top: 40px;
+    }
+    
+    .hero-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    blockquote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-style: italic;
+      color: var(--text-dark);
+      border-left: 3px solid var(--accent-gold);
+      padding-left: 25px;
+      margin: 40px 0;
+    }
+    
+    blockquote cite {
+      display: block;
+      font-size: 0.85rem;
+      font-style: normal;
+      color: var(--text-light);
+      margin-top: 12px;
+    }
+    
+    .runtime {
+      font-size: 13px;
+      color: var(--text-light);
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+    
+    /* Awards */
+    .awards-section {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .festival-name {
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      color: var(--text-mid);
+      margin-bottom: 30px;
+    }
+    
+    .awards-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 30px;
+    }
+    
+    .awards-grid img {
+      height: 90px;
+    }
+    
+    .award-badge {
+      padding: 12px 20px;
+      background: var(--cream);
+      border: 1px solid var(--accent-gold);
+      border-radius: 4px;
+      font-size: 13px;
+      color: var(--accent-gold);
+    }
+    
+    /* Themes */
+    .themes-section {
+      background: var(--cream);
+    }
+    
+    .themes-grid {
+      display: grid;
+      gap: 20px;
+      margin-top: 40px;
+    }
+    
+    .theme-card {
+      display: flex;
+      gap: 25px;
+      padding: 30px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+    }
+    
+    .theme-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 300;
+      color: var(--accent-blue);
+      min-width: 50px;
+    }
+    
+    .theme-title {
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--text-dark);
+      margin-bottom: 8px;
+    }
+    
+    .theme-desc {
+      font-size: 0.95rem;
+      color: var(--text-mid);
+      line-height: 1.7;
+    }
+    
+    /* Stills */
+    .stills-section {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .stills-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+      margin-top: 40px;
+    }
+    
+    .still-item {
+      aspect-ratio: 4/3;
+      background: var(--warm-gray);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-light);
+      font-size: 11px;
+    }
+    
+    .still-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    /* Credits */
+    .credits-section {
+      background: var(--cream);
+    }
+    
+    .credits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 50px;
+      margin-top: 40px;
+    }
+    
+    .credit-group h3 {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent-blue);
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+    
+    .credit-item {
+      margin-bottom: 18px;
+    }
+    
+    .credit-role {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-light);
+      margin-bottom: 4px;
+    }
+    
+    .credit-name {
+      font-size: 1rem;
+      color: var(--text-dark);
+    }
+    
+    .cast-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    
+    .cast-name {
+      padding: 10px 18px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      font-size: 14px;
+      color: var(--text-dark);
+    }
+    
+    /* Footer */
+    footer {
+      padding: 60px;
+      background: var(--text-dark);
+      color: var(--white);
+      text-align: center;
+    }
+    
+    footer p {
+      color: rgba(255,255,255,0.6);
+      font-size: 13px;
+    }
+    
+    footer a {
+      color: var(--accent-gold);
+      text-decoration: none;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .side-nav {
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: auto;
+        bottom: 0;
+        transform: none;
+        flex-direction: row;
+        justify-content: center;
+        border-radius: 0;
+        border: none;
+        border-top: 1px solid var(--border);
+        padding: 10px;
+      }
+      
+      main { margin-left: 0; margin-bottom: 70px; }
+      section { padding: 60px 25px; }
+      .stills-grid { grid-template-columns: repeat(2, 1fr); }
+      .awards-grid img { height: 60px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Side Navigation -->
+  <nav class="side-nav">
+    <a href="#about" class="active">Ab</a>
+    <a href="#awards">Aw</a>
+    <a href="#themes">Th</a>
+    <a href="#stills">St</a>
+    <a href="#credits">Cr</a>
+  </nav>
+  
+  <main>
+    <!-- About / Hero -->
+    <section id="about" class="hero">
+      <div class="container">
+        <p class="section-label">A Hybrid Dance Film</p>
+        <h1>Ten Poem Project: Auntie</h1>
+        <p class="subtitle">Dance. Film. Poetry. A migrant body remembering itself.</p>
+        
+        <p>The Ten Poem Project is a multimedia performance and short film that follows a migrant dancer as he attempts to piece himself together through movement, voice, and memory. Anchored in twelve original poems, the project explores migration, asylum, sexuality, trauma, the process of aging, and the resilience of the human spirit.</p>
+        
+        <p>At its heart, the project asks: How does the body keep knowing itself when displacement keeps rewriting its reality? Using choreography as a language for what cannot be said directly, the work treats dance as both archive and testimony.</p>
+        
+        <blockquote>
+          "How does the body keep knowing itself when displacement keeps rewriting its reality?"
+          <cite>— From the Project Statement</cite>
+        </blockquote>
+        
+        <div class="hero-image">
+          <img src="images/blue_01.jpg" alt="Ten Poem Project">
+        </div>
+        
+        <p class="runtime">Runtime: 4 minutes</p>
+      </div>
+    </section>
+    
+    <!-- Awards -->
+    <section id="awards" class="awards-section">
+      <div class="container">
+        <p class="section-label">Recognition</p>
+        <h2>Canada Shorts Film Festival 2025</h2>
+        <p class="festival-name">7 Awards Including Grand Prize</p>
+        
+        <div class="awards-grid">
+          <img src="images/laurel_grand_prize.png" alt="Grand Prize">
+          <img src="images/laurel_director.png" alt="Best Director">
+          <img src="images/laurel_cinematography.png" alt="Best Cinematography">
+          <img src="images/laurel_score.png" alt="Best Score">
+          <img src="images/laurel_documentary.png" alt="Best Documentary">
+          <img src="images/laurel_experimental.png" alt="Best Experimental">
+          <img src="images/laurel_international.png" alt="Best International">
+        </div>
+      </div>
+    </section>
+    
+    <!-- Themes -->
+    <section id="themes" class="themes-section">
+      <div class="container">
+        <p class="section-label">Thematic Pairings</p>
+        <h2>Six dualities that shape the work</h2>
+        
+        <div class="themes-grid">
+          <div class="theme-card">
+            <span class="theme-num">01</span>
+            <div>
+              <h3 class="theme-title">Migration & Identity</h3>
+              <p class="theme-desc">The constant negotiation between where you come from and where you find yourself.</p>
+            </div>
+          </div>
+          
+          <div class="theme-card">
+            <span class="theme-num">02</span>
+            <div>
+              <h3 class="theme-title">Memory & Trauma</h3>
+              <p class="theme-desc">How the body holds what the mind cannot speak—scars as archive, movement as testimony.</p>
+            </div>
+          </div>
+          
+          <div class="theme-card">
+            <span class="theme-num">03</span>
+            <div>
+              <h3 class="theme-title">Solitude & Loneliness</h3>
+              <p class="theme-desc">The difference between choosing stillness and being abandoned to it.</p>
+            </div>
+          </div>
+          
+          <div class="theme-card">
+            <span class="theme-num">04</span>
+            <div>
+              <h3 class="theme-title">Love & Relationships</h3>
+              <p class="theme-desc">Intimacy across distance, desire that survives erasure.</p>
+            </div>
+          </div>
+          
+          <div class="theme-card">
+            <span class="theme-num">05</span>
+            <div>
+              <h3 class="theme-title">Resilience & Growth</h3>
+              <p class="theme-desc">The quiet insistence on becoming, even when the world offers only resistance.</p>
+            </div>
+          </div>
+          
+          <div class="theme-card">
+            <span class="theme-num">06</span>
+            <div>
+              <h3 class="theme-title">Mortality & Aging</h3>
+              <p class="theme-desc">What the body knows about time that the mind refuses to accept.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Stills -->
+    <section id="stills" class="stills-section">
+      <div class="container">
+        <p class="section-label">Production</p>
+        <h2>Behind the Lens</h2>
+        
+        <div class="stills-grid">
+          <div class="still-item"><img src="images/studio_01.jpg" alt="Studio"></div>
+          <div class="still-item"><img src="images/blue_02.jpg" alt="Blue screen"></div>
+          <div class="still-item"><img src="images/bts_01.jpg" alt="Behind the scenes"></div>
+          <div class="still-item"><img src="images/studio_02.jpg" alt="Studio"></div>
+          <div class="still-item"><img src="images/blue_03.jpg" alt="Blue screen"></div>
+          <div class="still-item"><img src="images/bts_02.jpg" alt="Behind the scenes"></div>
+          <div class="still-item"><img src="images/studio_03.jpg" alt="Studio"></div>
+          <div class="still-item"><img src="images/blue_04.jpg" alt="Blue screen"></div>
+          <div class="still-item"><img src="images/bts_03.jpg" alt="Behind the scenes"></div>
+          <div class="still-item"><img src="images/studio_04.jpg" alt="Studio"></div>
+          <div class="still-item"><img src="images/bts_04.jpg" alt="Behind the scenes"></div>
+          <div class="still-item"><img src="images/bts_05.jpg" alt="Behind the scenes"></div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Credits -->
+    <section id="credits" class="credits-section">
+      <div class="container">
+        <p class="section-label">The Team</p>
+        <h2>Credits</h2>
+        
+        <div class="credits-grid">
+          <div class="credit-group">
+            <h3>Direction</h3>
+            <div class="credit-item">
+              <p class="credit-role">Director</p>
+              <p class="credit-name">Nakoa Taggart</p>
+            </div>
+            <div class="credit-item">
+              <p class="credit-role">Writers</p>
+              <p class="credit-name">Nakoa Taggart, Sinclair Emoghene</p>
+            </div>
+          </div>
+          
+          <div class="credit-group">
+            <h3>Production</h3>
+            <div class="credit-item">
+              <p class="credit-role">Producer</p>
+              <p class="credit-name">Sinclair Emoghene</p>
+            </div>
+            <div class="credit-item">
+              <p class="credit-role">Cinematographer</p>
+              <p class="credit-name">Gabriel Vazquez</p>
+            </div>
+          </div>
+          
+          <div class="credit-group">
+            <h3>Cast</h3>
+            <div class="cast-list">
+              <span class="cast-name">Jalani Miller</span>
+              <span class="cast-name">Lauren Troyer</span>
+              <span class="cast-name">Giovanni Ledezma</span>
+              <span class="cast-name">Sinclair Emoghene</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+      <p>© 2025 Sinclair Emoghene. <a href="https://www.sinclair.dance">sinclair.dance</a></p>
+    </footer>
+  </main>
+  
+  <script>
+    // Simple active nav highlighting
+    document.querySelectorAll('.side-nav a').forEach(link => {
+      link.addEventListener('click', function() {
+        document.querySelectorAll('.side-nav a').forEach(l => l.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>
